@@ -209,15 +209,21 @@ Collection object shown with defaults:
 	
 	// specify the minimum number of characters that must be typed before menu appears
 	menuShowMinLength: 0,
+	
 	// specify a regex to define after which characters the autocomplete option should open
 	// If null is used then it will not split the string & search in the whole line
 	// default value is /\s+/ means it will split on whitespace when this is not specified
 	autocompleteSeparator: /\s+/,
-
-
+		
 	// An option to hide the tribute when scrolled
 	// defaults to false, can accept true, or a container to bind the scroll event to.
 	closeOnScroll: true,
+		
+	// Set maximum number of items added to the input for the specific Collection, if no limit, set to null.
+	maxDisplayItems: null,
+	
+	// Block specific collection, so it can be triggered or not
+	isBlocked: false
 }
 ```
 
