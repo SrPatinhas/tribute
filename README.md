@@ -220,6 +220,7 @@ Collection object shown with defaults:
 	closeOnScroll: true,
 		
 	// Set maximum number of items added to the input for the specific Collection, if no limit, set to null.
+	// can only be used with a element in contenteditable mode
 	maxDisplayItems: null,
 	
 	// Block specific collection, so it can be triggered or not
@@ -390,7 +391,9 @@ if (tribute.isActive) {
 
 If you want to embed a link in your `selectTemplate` then you need to make sure that the
 anchor is wrapped in an element with `contenteditable="false"`. This makes the anchor
-clickable _and_ fixes issues with matches being modifiable.
+clickable _and_ fixes issues with matches being modifiable. We also recomend adding the `data-tribute-trigger=""`
+attribute to the anchor so that Tribute can check for the maxDisplayItems limit.
+
 
 ```js
 var tribute = new Tribute({
@@ -408,11 +411,11 @@ var tribute = new Tribute({
   ],
   selectTemplate: function(item) {
     return (
-      '<span contenteditable="false"><a href="http://zurb.com" target="_blank" title="' +
-      item.original.email +
-      '">' +
-      item.original.value +
-      "</a></span>"
+      '<span contenteditable="false">' +
+	  	'<a href="http://zurb.com" target="_blank" data-tribute-trigger="@" title="' + item.original.email + '">' +
+      		item.original.value +
+      	'</a>' +
+	  '</span>'
     );
   }
 });

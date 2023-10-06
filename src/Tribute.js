@@ -208,9 +208,8 @@ class Tribute {
 			return `${this.current.collection.trigger}${this.current.mentionText}`;
 		if (this.range.isContentEditable(this.current.element)) {
 			return (
-				'<span class="tribute-mention">' +
-				(this.current.collection.trigger +
-					item.original[this.current.collection.fillAttr]) +
+				'<span class="tribute-mention" data-tribute-trigger="' + this.current.collection.trigger + '">' +
+					(this.current.collection.trigger + item.original[this.current.collection.fillAttr]) +
 				"</span>"
 			);
 		}
