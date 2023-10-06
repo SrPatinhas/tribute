@@ -26,6 +26,12 @@ class TributeMenuEvents {
 			false
 		);
 
+		this.closeOnScrollEvent = this.debounce(() => {
+			if (this.tribute.isActive) {
+				this.tribute.hideMenu()
+			}
+		}, 10, false)
+
 		// fixes IE11 issues with mousedown
 		this.tribute.range
 			.getDocument()
@@ -35,14 +41,16 @@ class TributeMenuEvents {
 			.addEventListener("mousedown", this.menuClickEvent, false);
 		window.addEventListener("resize", this.windowResizeEvent);
 
-		if (this.menuContainer) {
-			this.menuContainer.addEventListener(
-				"scroll",
-				this.menuContainerScrollEvent,
-				false
-			);
+		if (this.tribute.closeOnScroll == true) {
+			window.addEventListener('scroll', this.closeOnScrollEvent)
+		} else if (this.tribute.closeOnScroll != false) {
+			this.tribute.closeOnScroll.addEventListener('scroll', this.closeOnScrollEvent, false)
 		} else {
-			window.addEventListener("scroll", this.menuContainerScrollEvent);
+			if (this.menuContainer) {
+				this.menuContainer.addEventListener('scroll', this.menuContainerScrollEvent, false)
+			} else {
+				window.addEventListener('scroll', this.menuContainerScrollEvent)
+			}
 		}
 	}
 
@@ -55,14 +63,16 @@ class TributeMenuEvents {
 			.removeEventListener("MSPointerDown", this.menuClickEvent, false);
 		window.removeEventListener("resize", this.windowResizeEvent);
 
-		if (this.menuContainer) {
-			this.menuContainer.removeEventListener(
-				"scroll",
-				this.menuContainerScrollEvent,
-				false
-			);
+		if (this.tribute.closeOnScroll === true) {
+			window.removeEventListener('scroll', this.closeOnScrollEvent)
+		} else if (this.tribute.closeOnScroll != false) {
+			this.tribute.closeOnScroll.removeEventListener('scroll', this.closeOnScrollEvent)
 		} else {
-			window.removeEventListener("scroll", this.menuContainerScrollEvent);
+			if (this.menuContainer) {
+				this.menuContainer.removeEventListener('scroll', this.menuContainerScrollEvent, false)
+			} else {
+				window.removeEventListener('scroll', this.menuContainerScrollEvent)
+			}
 		}
 	}
 

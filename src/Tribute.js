@@ -30,7 +30,8 @@ class Tribute {
 					spaceSelectsMatch = false,
 					searchOpts = {},
 					menuItemLimit = null,
-					menuShowMinLength = 0
+					menuShowMinLength = 0,
+					closeOnScroll = false,
 				}) {
 		this.autocompleteMode = autocompleteMode;
 		this.autocompleteSeparator = autocompleteSeparator;
@@ -44,6 +45,7 @@ class Tribute {
 		this.positionMenu = positionMenu;
 		this.hasTrailingSpace = false;
 		this.spaceSelectsMatch = spaceSelectsMatch;
+		this.closeOnScroll = closeOnScroll;
 
 		if (this.autocompleteMode) {
 			trigger = "";
